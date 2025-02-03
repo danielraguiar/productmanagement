@@ -1,0 +1,29 @@
+.category-list-container {
+  padding: 20px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h1 {
+      margin: 0;
+    }
+  }
+
+  .node-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .node-actions {
+      visibility: hidden;
+    }
+
+    &:hover .node-actions {
+      visibility: visible;
+    }
+  }
+} 

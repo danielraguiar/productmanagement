@@ -1,0 +1,29 @@
+.filter-container {
+  padding: 16px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .price-range {
+      display: flex;
+      gap: 16px;
+
+      mat-form-field {
+        flex: 1;
+      }
+    }
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    button {
+      align-self: flex-end;
+    }
+  }
+} 

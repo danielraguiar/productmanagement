@@ -1,0 +1,52 @@
+.product-list-container {
+  padding: 20px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #333;
+    }
+  }
+
+  .filter {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: 100%;
+
+    .mat-cell {
+      padding: 8px 16px;
+    }
+
+    .mat-header-cell {
+      font-weight: bold;
+      color: #666;
+    }
+
+    .mat-column-actions {
+      width: 100px;
+      text-align: center;
+    }
+
+    .mat-column-available {
+      width: 100px;
+      text-align: center;
+    }
+
+    .mat-column-price {
+      width: 120px;
+    }
+  }
+
+  .mat-paginator {
+    margin-top: 20px;
+  }
+} 

@@ -1,0 +1,52 @@
+<div class="category-list-container">
+  <div class="header">
+    <h1>Categories</h1>
+    <button mat-raised-button color="primary" (click)="onAddCategory()">
+      <mat-icon>add</mat-icon>
+      Add Root Category
+    </button>
+  </div>
+
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- Tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+      <div class="node-content">
+        <span>{{node.name}}</span>
+        <div class="node-actions">
+          <button mat-icon-button (click)="onAddSubcategory(node.id)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="onEditCategory(node.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="onDeleteCategory(node)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-tree-node>
+
+    <!-- Tree node template for expandable nodes -->
+    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+      <div class="node-content">
+        <button mat-icon-button matTreeNodeToggle>
+          <mat-icon>
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        <span>{{node.name}}</span>
+        <div class="node-actions">
+          <button mat-icon-button (click)="onAddSubcategory(node.id)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="onEditCategory(node.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="onDeleteCategory(node)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-tree-node>
+  </mat-tree>
+</div> 

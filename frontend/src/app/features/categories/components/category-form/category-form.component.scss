@@ -1,0 +1,40 @@
+.category-form-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+
+  .form-header {
+    margin-bottom: 20px;
+    
+    h2 {
+      margin: 0;
+      color: #333;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 16px;
+
+      button {
+        min-width: 100px;
+
+        mat-spinner {
+          display: inline-block;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+} 

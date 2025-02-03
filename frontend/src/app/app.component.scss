@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+mat-sidenav-container {
+  flex: 1;
+  margin-top: 64px;
+}
+
+mat-sidenav {
+  width: 250px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.active {
+  background-color: rgba(0, 0, 0, 0.04);
+} 

@@ -1,0 +1,45 @@
+<div class="filter-container">
+  <form [formGroup]="filterForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Search by name</mat-label>
+      <input matInput formControlName="name" placeholder="Product name">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <div class="price-range">
+      <mat-form-field appearance="outline">
+        <mat-label>Min Price</mat-label>
+        <input matInput type="number" formControlName="minPrice" placeholder="0">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Max Price</mat-label>
+        <input matInput type="number" formControlName="maxPrice" placeholder="999999">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="categoryId">
+        <mat-option [value]="''">All Categories</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category.id">
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Availability</mat-label>
+      <mat-select formControlName="available">
+        <mat-option [value]="''">All</mat-option>
+        <mat-option [value]="true">Available</mat-option>
+        <mat-option [value]="false">Not Available</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-button color="warn" (click)="clearFilters()">
+      <mat-icon>clear</mat-icon>
+      Clear Filters
+    </button>
+  </form>
+</div> 
