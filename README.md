@@ -11,6 +11,7 @@ A full-stack application for managing products and categories with role-based ac
 - 📱 Responsive Material Design UI
 - 🔄 Real-time form validation
 - 📊 Pagination and Sorting
+- 🐳 Docker support for development
 
 ## Tech Stack
 
@@ -36,44 +37,59 @@ A full-stack application for managing products and categories with role-based ac
 - Java 17+
 - Node.js 18+
 - npm 9+
-- MySQL 8+
+- Docker & Docker Compose
 
 ## Project Structure 
 
+```
 product-management/
 ├── backend/
-│ ├── src/
-│ │ ├── main/
-│ │ │ ├── java/
-│ │ │ │ └── com/product/management/
-│ │ │ │ ├── config/
-│ │ │ │ ├── controller/
-│ │ │ │ ├── dto/
-│ │ │ │ ├── model/
-│ │ │ │ ├── repository/
-│ │ │ │ └── service/
-│ │ │ └── resources/
-│ │ └── test/
-│ └── pom.xml
-└── frontend/
-├── src/
-│ ├── app/
-│ │ ├── core/
-│ │ ├── features/
-│ │ └── shared/
-│ ├── assets/
-│ └── environments/
-├── package.json
-└── angular.json
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/product/management/
+│   │   │   │   ├── config/
+│   │   │   │   ├── controller/
+│   │   │   │   ├── dto/
+│   │   │   │   ├── exception/
+│   │   │   │   ├── mapper/
+│   │   │   │   ├── model/
+│   │   │   │   ├── repository/
+│   │   │   │   └── service/
+│   │   │   └── resources/
+│   │   └── test/
+│   │       └── java/com/product/management/
+│   │           ├── controller/
+│   │           └── service/
+│   ├── Dockerfile
+│   └── pom.xml
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── core/
+│   │   │   │   ├── guards/
+│   │   │   │   ├── interceptors/
+│   │   │   │   └── services/
+│   │   │   ├── features/
+│   │   │   │   ├── auth/
+│   │   │   │   ├── categories/
+│   │   │   │   └── products/
+│   │   │   └── shared/
+│   │   │       ├── components/
+│   │   │       └── models/
+│   │   ├── assets/
+│   │   └── environments/
+│   ├── Dockerfile
+│   └── package.json
+└── docker-compose.yml
 ```
 
 ## Getting Started
 
-### Backend Setup
+### Development Environment Setup
 
-1. Create MySQL database:
-```sql
-CREATE DATABASE product_management;
+1. Start the MySQL database using Docker:
+```bash
+docker-compose up -d mysql
 ```
 
 2. Configure database connection in `application.yml`:
@@ -85,92 +101,32 @@ spring:
     password: root
 ```
 
-3. Build and run the application:
+3. Build and run the backend:
 ```bash
 cd backend
 mvn clean install
 mvn spring-boot:run
 ```
 
-The backend will start on `http://localhost:8080`
-
-### Frontend Setup
-
-1. Install dependencies:
+4. Install frontend dependencies and start development server:
 ```bash
 cd frontend
 npm install
-```
-
-2. Start development server:
-```bash
 npm start
 ```
 
-The frontend will start on `http://localhost:4200`
+### Using Docker Compose (Optional)
 
-## API Documentation
+To run the entire application stack using Docker:
 
-### Authentication
-
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "username": "admin",
-  "password": "admin123"
-}
+```bash
+docker-compose up -d
 ```
 
-### Products
-
-```http
-# Get products with filters
-GET /api/products/filter?name=test&minPrice=10&maxPrice=100&categoryId=1&available=true
-
-# Create product
-POST /api/products
-Content-Type: application/json
-
-{
-  "name": "Product Name",
-  "description": "Description",
-  "price": 99.99,
-  "categoryId": 1,
-  "available": true
-}
-
-# Update product
-PUT /api/products/{id}
-
-# Delete product
-DELETE /api/products/{id}
-```
-
-### Categories
-
-```http
-# Get root categories
-GET /api/categories/root
-
-# Create category
-POST /api/categories
-Content-Type: application/json
-
-{
-  "name": "Category Name",
-  "parentId": 1
-}
-```
-
-## Security
-
-The application implements role-based access control with two roles:
-- `ROLE_ADMIN`: Full access to all features
-- `ROLE_USER`: Read-only access to products and categories
-
-Authentication is handled via JWT tokens.
+This will start:
+- MySQL database (port 3306)
+- Backend API (port 8080)
+- Frontend application (port 4200)
 
 ## Testing
 
@@ -178,6 +134,7 @@ Authentication is handled via JWT tokens.
 
 ```bash
 # Run unit tests
+cd backend
 mvn test
 
 # Run integration tests
@@ -187,6 +144,7 @@ mvn verify
 ### Frontend Tests
 
 ```bash
+cd frontend
 # Run unit tests
 npm test
 
@@ -202,15 +160,44 @@ npm run test:coverage
 ### Backend
 
 ```bash
+cd backend
 mvn clean package -P prod
 ```
-
-The JAR file will be generated in `target/` directory.
 
 ### Frontend
 
 ```bash
+cd frontend
 npm run build:prod
 ```
 
-The build artifacts will be stored in the `dist/` directory.
+## Docker Build
+
+Build individual containers:
+
+```bash
+# Build backend
+docker build -t product-management-api ./backend
+
+# Build frontend
+docker build -t product-management-ui ./frontend
+```
+
+## API Documentation
+
+API documentation is available at `http://localhost:8080/swagger-ui.html` when running the backend.
+
+## Security
+
+The application implements role-based access control with two roles:
+- `ROLE_ADMIN`: Full access to all features
+- `ROLE_USER`: Read-only access to products and categories
+
+Authentication is handled via Basic Auth.
+
+## Default Credentials
+
+```
+Username: admin
+Password: admin123
+```
