@@ -115,19 +115,6 @@ npm install
 npm start
 ```
 
-### Using Docker Compose (Optional)
-
-To run the entire application stack using Docker:
-
-```bash
-docker-compose up -d
-```
-
-This will start:
-- MySQL database (port 3306)
-- Backend API (port 8080)
-- Frontend application (port 4200)
-
 ## Testing
 
 ### Backend Tests
